@@ -22,12 +22,27 @@ const emit = defineEmits<{
                 <h3>{{ product.title }}</h3>
                 <i>{{ product.brand }}</i>
                 <p>{{ product.description }}</p>
-                <button @click="emit(`addToCart `, product)" class="button is-primary">Add to Cart</button>
+                <button @click="emit(`addToCart`, product)" class="button is-primary">Add to Cart</button>
             </div>
         </div>
     </div>
 </template>
 
 <style scoped>
+.card {
+    flex-basis: 15rem;
+    flex-grow: 1;
+    margin: .5rem;
+}
 
+h3 {
+    font-weight: bold;
+}
+
+.price {
+    font-weight: bold;
+    font-size: xx-large;
+    color: hotpink;
+    float: right;
+}
 </style>
