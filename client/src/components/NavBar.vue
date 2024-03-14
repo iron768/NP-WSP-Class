@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { RouterLink } from 'vue-router';
 import { ref } from 'vue';
+import LoginBadge from "./LoginBadge.vue";
+
+import { count, isOpen } from "@/viewmodel/cart";
 
 let isActive = ref(false);
 
@@ -8,79 +11,90 @@ function toggleMenu() {
   isActive.value = !isActive.value;
 }
 
+function toggleCart() {
+  isOpen.value = !isOpen.value;
+}
 </script>
 
 <template>
-    <nav class="navbar" role="navigation" aria-label="main navigation">
-  <div class="navbar-brand">
-    <a class="navbar-item" href="https://bulma.io">
-      <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28">
-    </a>
+  <nav class="navbar" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://bulma.io">
+        <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28">
+      </a>
 
-    <a role="button" @click="toggleMenu" :class=" isActive ? `is-active` : `` " class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-    </a>
-  </div>
+      <a role="button" @click="toggleMenu" :class="isActive ? `is-active` : ``" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
 
-  <div id="navbarBasicExample" class="navbar-menu" :class=" isActive ? `is-active` : `` " >
-    <div class="navbar-start">
-      <RouterLink to="/" class="navbar-item">
-        Home
-      </RouterLink>
+    <div id="navbarBasicExample" class="navbar-menu" :class="isActive ? `is-active` : ``">
+      <div class="navbar-start">
+        <RouterLink to="/" class="navbar-item">
+          Home
+        </RouterLink>
 
-      <RouterLink to="/documentation" class="navbar-item">
-        Documentation
-      </RouterLink>
+        <RouterLink to="/documentation" class="navbar-item">
+          Documentation
+        </RouterLink>
 
-      <RouterLink to="/products" class="navbar-item">
-        Products
-      </RouterLink>
+        <RouterLink to="/products" class="navbar-item">
+          Products
+        </RouterLink>
 
-      <div class="navbar-item has-dropdown is-hoverable">
-        <a class="navbar-link">
-          More
-        </a>
-
-        <div class="navbar-dropdown">
-          <RouterLink to="/about" class="navbar-item">
-            About
-          </RouterLink>
-          <a class="navbar-item">
-            Jobs
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link">
+            More
           </a>
-          <a class="navbar-item">
-            Contact
-          </a>
-          <hr class="navbar-divider">
-          <a class="navbar-item">
-            Report an issue
-          </a>
+
+          <div class="navbar-dropdown">
+            <RouterLink to="/about" class="navbar-item">
+              About
+            </RouterLink>
+            <a class="navbar-item">
+              Jobs
+            </a>
+            <a class="navbar-item">
+              Contact
+            </a>
+            <hr class="navbar-divider">
+            <a class="navbar-item">
+              Report an issue
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="navbar-end">
+        <div class="navbar-item">
+          <button class="button is-light" @click="toggleCart()" :class="{ shiftLeft: isOpen }">
+            <i class="fas fa-shopping-cart"></i>
+            <span class="tag is-danger is-rounded sup-tag">{{ count }}</span>
+          </button>
+        </div>
+
+        <div class="navbar-item">
+          <LoginBadge />
         </div>
       </div>
     </div>
-
-    <div class="navbar-end">
-      <div class="navbar-item">
-        <div class="buttons">
-          <a class="button is-primary">
-            <strong>Sign up</strong>
-          </a>
-          <a class="button is-light">
-            Log in
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-</nav>
+  </nav>
 </template>
 
 <style scoped>
-
 .router-link-active {
-    border-bottom: 2px solid darkcyan;
+  border-bottom: 2px solid darkcyan;
+}
+
+.sup-tag {
+  transform: translate(-20%, -50%);
+}
+
+.shiftLeft {
+  transform: translateX(-100%);
+  transition: transform 1s ease-in-out;
 }
 
 </style>
