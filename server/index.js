@@ -8,7 +8,7 @@ app.get('/', (req, res) => {
     res.send( 'Hello New Paltz!' );
 });
 
-app.use('/users', users);
+app.use('/api/v1/users', users);
 
 app.listen(PORT, () => {
     console.log(`App listening at http://localhost:${PORT}`)
